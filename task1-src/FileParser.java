@@ -3,15 +3,16 @@ import java.util.Scanner;
 
 public class FileParser {
 	
-	//String category;
+	//These variables represent the types of data we're looking for.
 	String sender = "None";
 	String organization = "None";
 	String subject = "None";
 	String body ="None";
+	
+	//This variable will hold the parsed line that will be inserted into the .tsv file.
 	String parsedLine;
 	
-	//File file = new File("C:\\Users\\Carter Jones\\Desktop\\Big Data\\20-newsgroups\\sci.space\\59849");
-	
+	//This method takes in a file and a category determined by the directory name, and cleans the data and formats it properly.
 	void parseFile(File file, String category) {
 		
 		String value;
@@ -22,7 +23,7 @@ public class FileParser {
 			
 			while(output.hasNextLine()) {
 				value = output.nextLine();
-				
+	
 				if(value.contains(">")) {
 					continue;
 				} else if(value.contains("From:")) {
@@ -41,6 +42,7 @@ public class FileParser {
 			body = body.replaceAll("\\s+", " ");
 			body = body.replaceAll("\\n", " ");
 			body = body.replaceAll("\\t", " ");
+			
 			output.close();
 			
 			parsedLine = category + "\t" + sender + "\t" + subject + "\t" + organization + "\t" + body;
@@ -54,3 +56,4 @@ public class FileParser {
 		return parsedLine;
 	}
 }
+	
